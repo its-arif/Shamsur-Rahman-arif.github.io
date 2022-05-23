@@ -19,6 +19,29 @@
     <link rel="stylesheet" href="assets/css/plugins/feature.css">
     <!-- Style css -->
     <link rel="stylesheet" href="assets/css/style.css">
+
+
+
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/magic-mouse.css" />
+    <link rel="stylesheet" href="css/website.css" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161480435-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-161480435-1');
+    </script>
 </head>
 
 <body class="template-color-1 spybody" data-spy="scroll" data-target=".navbar-example2" data-offset="70">
@@ -318,7 +341,84 @@
 
 
 
-
+        /div>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script type="text/javascript" src="https://res.cloudinary.com/veseylab/raw/upload/v1636192990/magicmouse/magic_mouse-1.2.1.cdn.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/run_prettify.js"></script>
+    
+        <script type="module">
+          var app = new Vue({
+            el: "#app",
+            data: {
+              selectedEffect:'example #1',
+              effectList:[
+                "example #1",
+                "example #2",
+                "example #3",
+                "example #4",
+                "example #5",
+              ],
+              options: {
+                "cursorOuter": "circle-basic",
+  "hoverEffect": "pointer-blur",
+  "hoverItemMove": false,
+  "defaultCursor": false,
+  "outerWidth": 41,
+  "outerHeight": 41
+              }
+            },
+            mounted(){
+              magicMouse(this.options);
+              prettier();
+            },
+            methods:{
+              changeEffect(){
+                document.body.style.cursor = "unset";
+                var cursorDOM = document.getElementById("magicMouseCursor");
+                var pointerDOM = document.getElementById("magicPointer");
+                if(cursorDOM){
+                  cursorDOM.parentNode.removeChild(cursorDOM)
+                }
+                if(pointerDOM){
+                  pointerDOM.parentNode.removeChild(pointerDOM)
+                }
+                switch(this.selectedEffect){
+                  case "example #1":
+                    this.options.hoverEffect = "circle-move"
+                    this.options.cursorOuter = "circle-basic"
+                  break;
+                  case "example #2":
+                    this.options.hoverEffect = "pointer-overlay"
+                    this.options.cursorOuter = "disable"
+                  break;
+                  case "example #3":
+                    this.options.hoverEffect = "pointer-blur"
+                    this.options.cursorOuter = "disable"
+                  break;
+                  case "example #4":
+                    this.options.outerWidth = 41;
+                    this.options.outerHeight = 41;
+                    this.options.hoverEffect = "pointer-blur"
+                    this.options.cursorOuter = "circle-basic"
+                  break;
+                  case "example #5":
+                    this.options.outerWidth = 41;
+                    this.options.outerHeight = 41;
+                    this.options.hoverEffect = "circle-move"
+                    this.options.cursorOuter = "circle-basic"
+                    this.options.defaultCursor = true
+                  break;
+                }
+                magicMouse(this.options);
+    
+                let codeBlock = document.getElementById("codeSection")
+                codeBlock.classList.remove("prettyprinted")
+                codeBlock.innerHTML = "options = " + JSON.stringify(this.options, null, 2) + "; \n magicMouse(options);";
+                prettier();
+              }
+            },
+          });
+        </script>
 
 
 
